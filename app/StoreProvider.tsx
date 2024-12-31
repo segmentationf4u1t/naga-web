@@ -3,19 +3,13 @@ import { type AppStore, makeStore } from "@/lib/store";
 import { useRef } from "react";
 import { Provider } from "react-redux";
 
-export default function StoreProvider({
-	children,
-}: {
+interface StoreProviderProps {
 	children: React.ReactNode;
-}) {
+}
+export default function StoreProvider({ children }: StoreProviderProps) {
 	const storeRef = useRef<AppStore>();
 	if (!storeRef.current) {
 		storeRef.current = makeStore();
-		// Make the screenSize slice initial false
-		storeRef.current.dispatch({
-			type: "screenSize/setIsMobile",
-			payload: false,
-		});
 	}
 
 	return <Provider store={storeRef.current}>{children}</Provider>;
