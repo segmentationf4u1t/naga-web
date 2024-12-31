@@ -27,8 +27,8 @@ export default function TabsDemo() {
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-2">
-						<div className="space-y-1"></div>
-						<div className="space-y-1"></div>
+						<div className="space-y-1" />
+						<div className="space-y-1" />
 					</CardContent>
 					<CardFooter>
 						<Button>Save changes</Button>
@@ -45,8 +45,8 @@ export default function TabsDemo() {
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-2">
-						<div className="space-y-1"></div>
-						<div className="space-y-1"></div>
+						<div className="space-y-1" />
+						<div className="space-y-1" />
 					</CardContent>
 					<CardFooter>
 						<Button>Save password</Button>

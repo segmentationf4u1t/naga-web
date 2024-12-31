@@ -15,59 +15,27 @@ const ModelTableSkeleton: FC = () => {
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className="w-[100px]">
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
-						<TableHead>
-							<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-						</TableHead>
+						{Array.from({ length: 8 }, (_, i) => (
+							<TableHead
+								key={`skeleton-header-${crypto.randomUUID()}`}
+								className={i === 0 ? "w-[100px]" : ""}
+							>
+								<div className="h-4 bg-gray-200 rounded-md animate-pulse" />
+							</TableHead>
+						))}
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{Array.from({ length: 5 }).map((_, index) => (
-						<TableRow key={index}>
-							<TableHead className="w-[100px] h-[100px]">
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
-							<TableHead>
-								<div className="h-4 bg-gray-200 rounded-md animate-pulse"></div>
-							</TableHead>
+					{Array.from({ length: 5 }, (_) => (
+						<TableRow key={`skeleton-row-${crypto.randomUUID()}`}>
+							{Array.from({ length: 8 }, (_, colIndex) => (
+								<TableHead
+									key={`skeleton-cell-${crypto.randomUUID()}`}
+									className={colIndex === 0 ? "w-[100px] h-[100px]" : ""}
+								>
+									<div className="h-4 bg-gray-200 rounded-md animate-pulse" />
+								</TableHead>
+							))}
 						</TableRow>
 					))}
 				</TableBody>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { nanoid } from "nanoid";
 
 interface InfiniteLooperProps {
 	speed: number;
@@ -26,7 +27,7 @@ const InfiniteLooper: React.FC<InfiniteLooperProps> = ({
 				currentInnerRef.setAttribute("data-animate", "true");
 			}, 10);
 		}
-	}, [innerRef]);
+	}, []);
 
 	const setupInstances = useCallback(() => {
 		const currentOuterRef = outerRef.current;
@@ -62,9 +63,9 @@ const InfiniteLooper: React.FC<InfiniteLooperProps> = ({
 	return (
 		<div className="looper" ref={outerRef}>
 			<div className="looper__innerList" ref={innerRef} data-animate="true">
-				{[...Array(looperInstances)].map((_, ind) => (
+				{[...Array(looperInstances)].map(() => (
 					<div
-						key={ind}
+						key={nanoid()}
 						className="looper__listInstance"
 						style={{
 							animationDuration: `${speed}s`,
@@ -86,15 +87,15 @@ interface ModelCompaniesProps {
 const ModelCompanies: React.FC<ModelCompaniesProps> = ({ images }) => (
 	<InfiniteLooper speed={10} direction="right">
 		<div className="contentBlock contentBlock--two">
-			{images.map((image, index) => (
+			{images.map((image) => (
 				<Image
 					style={{ color: "white" }}
 					className="p-2"
 					src={`/logos/${image}`}
 					width={120}
 					height={100}
-					key={index}
-					alt="image"
+					key={image}
+					alt={`Company logo - ${image.split(".")[0]}`}
 				/>
 			))}
 		</div>

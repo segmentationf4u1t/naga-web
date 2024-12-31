@@ -4,7 +4,7 @@ import type { TierData } from "./ModelTable";
 
 interface TiersInfoProps {
 	tierData: TierData;
-	tierKey: string;
+	tierKey: keyof TierData;
 }
 
 const TiersInfo: FC<TiersInfoProps> = ({ tierData, tierKey }) => {

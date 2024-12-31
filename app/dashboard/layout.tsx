@@ -1,51 +1,38 @@
-"use client";
-import MobileNav from "@/components/MobileNav";
-import DashboardNav from "@/components/dashboard/DashboardNav";
-import { Core } from "@/conf/cfg";
-import { getNavItems } from "@/conf/navItems";
-import { useAppSelector } from "@/lib/hooks";
-import { useScreenSize } from "@/lib/hooks/index";
-import { BadgeCheck } from "lucide-react";
-import Link from "next/link";
+import { auth } from "@/auth";
+import DashboardNavigationServer from "@/components/dashboard/DashboardNavigationServer";
+import SignIn from "@/components/sign-in";
+import { Toaster } from "@/components/ui/toaster";
+import { headers } from "next/headers";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	useScreenSize();
+	const headerList = await headers();
+	const session = await auth.api.getSession({
+		headers: headerList, // you need to pass the headers object.
+	});
 
-	const isMobile = useAppSelector((state) => state.screenSize.isMobile);
-
-	const navItems = getNavItems("dashboard");
+	if (!session) {
+		return <SignIn />;
+	}
 
 	return (
-		<>
-			{isMobile ? (
-				<>
-					<MobileNav navItems={navItems} />
-					<main className="flex flex-1 p-4 md:p-6 h-[calc(100%-4rem)] overflow-auto">
-						{children}
-					</main>
-				</>
-			) : (
-				<div className="grid h-screen grid-cols-[260px_1fr] overflow-auto">
-					<DashboardNav navItems={navItems} />
-					<div className="flex flex-col h-full">
-						<header className="flex items-center h-16 px-4 border-b dark:border-neutral-00">
-							<Link href={Core.discord} className="flex items-center">
-								<BadgeCheck className="w-6 h-6 text-yellow-500" />
-								<p className="text-sm text-gray-500 ml-2 hover:underline no-underline">
-									Unlock additional perks by upgrading to Pro today!
-								</p>
-							</Link>
-						</header>
-						<main className=" p-4 md:p-6 h-[calc(100%-4rem)] overflow-auto">
-							{children}
-						</main>
-					</div>
+		<div className="min-h-screen flex">
+			{/* Sidebar */}
+			<aside className="w-[220px] lg:w-[280px] hidden md:flex flex-col border-r bg-muted/40">
+				<div className="flex-1 overflow-y-auto">
+					<DashboardNavigationServer />
 				</div>
-			)}
-		</>
+				<div className="p-2" />
+			</aside>
+
+			{/* Main content */}
+			<main className="flex-1 flex flex-col overflow-hidden">
+				<div className="flex-1 overflow-y-auto">{children}</div>
+			</main>
+			<Toaster />
+		</div>
 	);
 }
