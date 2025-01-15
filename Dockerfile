@@ -16,6 +16,9 @@ COPY prisma ./prisma
 # Generate Prisma Client
 RUN bunx prisma generate
 
+# Add this environment variable for hot reloading
+ENV WATCHPACK_POLLING=true
+
 # Start development server
 CMD ["bun", "run", "dev"]
 
@@ -60,7 +63,7 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 
 # Set necessary environment variables
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0

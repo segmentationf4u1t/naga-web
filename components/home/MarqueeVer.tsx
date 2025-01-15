@@ -309,7 +309,7 @@ export function MarqueeVertical() {
 					<Marquee
 						pauseOnHover
 						vertical
-						className="[--duration:60s] w-1/4 px-2"
+						className="[--duration:40s] w-1/4 px-2"
 					>
 						{firstRow.map((model) => (
 							<LlmCard key={model.id} {...mapModelToLLMInfo(model)} />
@@ -319,7 +319,7 @@ export function MarqueeVertical() {
 						reverse
 						pauseOnHover
 						vertical
-						className="[--duration:60s] w-1/4 px-2"
+						className="[--duration:40s] w-1/4 px-2"
 					>
 						{secondRow.map((model) => (
 							<LlmCard key={model.id} {...mapModelToLLMInfo(model)} />
@@ -328,7 +328,7 @@ export function MarqueeVertical() {
 					<Marquee
 						pauseOnHover
 						vertical
-						className="[--duration:60s] w-1/4 px-2"
+						className="[--duration:40s] w-1/4 px-2"
 					>
 						{thirdRow.map((model) => (
 							<LlmCard key={model.id} {...mapModelToLLMInfo(model)} />
@@ -338,7 +338,7 @@ export function MarqueeVertical() {
 						reverse
 						pauseOnHover
 						vertical
-						className="[--duration:60s] w-1/4 px-2"
+						className="[--duration:30s] w-1/4 px-2"
 					>
 						{fourthRow.map((model) => (
 							<LlmCard key={model.id} {...mapModelToLLMInfo(model)} />

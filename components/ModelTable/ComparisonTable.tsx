@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/tooltip";
 import { motion } from "framer-motion";
 import { formatPricePerMillion, formatContextLength } from "@/lib/the_library";
+import Link from "next/link";
 
 interface EvaluationData {
 	model: string;
@@ -119,20 +120,20 @@ ModelInfo.displayName = "ModelInfo";
 // Memoized ModelEvaluation component
 const ModelEvaluation = memo(
 	({ evaluation }: { evaluation: EvaluationData | null }) => {
-		if (!evaluation) return null;
-
 		const evaluationMap = useMemo(
 			() => ({
-				"Global Average": evaluation.globalAverage,
-				Reasoning: evaluation.reasoning,
-				Coding: evaluation.coding,
-				Mathematics: evaluation.mathematics,
-				"Data Analysis": evaluation.dataAnalysis,
-				Language: evaluation.language,
-				IF: evaluation.if,
+				"Global Average": evaluation?.globalAverage ?? 0,
+				Reasoning: evaluation?.reasoning ?? 0,
+				Coding: evaluation?.coding ?? 0,
+				Mathematics: evaluation?.mathematics ?? 0,
+				"Data Analysis": evaluation?.dataAnalysis ?? 0,
+				Language: evaluation?.language ?? 0,
+				IF: evaluation?.if ?? 0,
 			}),
 			[evaluation],
 		);
+
+		if (!evaluation) return null;
 
 		return (
 			<div className="space-y-4">
@@ -351,7 +352,7 @@ export default function ComparisonTable({
 			model.id.toLowerCase().includes(searchQuery.toLowerCase()),
 		);
 	}, [mergedData, searchQuery]);
-	console.log(filteredData);
+
 	return (
 		<div className="w-full">
 			<Input
@@ -487,40 +488,42 @@ export default function ComparisonTable({
 											{model.tiersData?.free ? (
 												model.tiersData.free
 											) : (
-												<motion.span
-													className="text-amber-500"
-													initial={{ opacity: 0 }}
-													animate={{ opacity: 1 }}
-													transition={{ delay: 0.5 }}
-												>
-													<span className="inline-flex">
-														{Array.from("Upgrade to unlock").map(
-															(char, index) => (
-																<motion.span
-																	key={`${model.id}-upgrade-${index}`}
-																	style={{
-																		display: "inline-block",
-																		whiteSpace: "pre",
-																	}}
-																	initial={{ y: 0 }}
-																	animate={{ y: [0, -3, 0] }}
-																	transition={{
-																		duration: 0.5,
-																		delay: index * 0.05,
-																		repeat: Number.POSITIVE_INFINITY,
-																		repeatType: "loop",
-																	}}
-																>
-																	{char}
-																</motion.span>
-															),
-														)}
-														<ExternalLink
-															className="h-4 w-4 ml-1"
-															aria-hidden="true"
-														/>
-													</span>
-												</motion.span>
+												<Link href="/dashboard/profile/billing">
+													<motion.span
+														className="text-amber-500 cursor-pointer hover:text-amber-400"
+														initial={{ opacity: 0 }}
+														animate={{ opacity: 1 }}
+														transition={{ delay: 0.5 }}
+													>
+														<span className="inline-flex">
+															{Array.from("Upgrade to unlock").map(
+																(char, index) => (
+																	<motion.span
+																		key={`${model.id}-upgrade-${index}`}
+																		style={{
+																			display: "inline-block",
+																			whiteSpace: "pre",
+																		}}
+																		initial={{ y: 0 }}
+																		animate={{ y: [0, -3, 0] }}
+																		transition={{
+																			duration: 0.5,
+																			delay: index * 0.05,
+																			repeat: Number.POSITIVE_INFINITY,
+																			repeatType: "loop",
+																		}}
+																	>
+																		{char}
+																	</motion.span>
+																),
+															)}
+															<ExternalLink
+																className="h-4 w-4 ml-1"
+																aria-hidden="true"
+															/>
+														</span>
+													</motion.span>
+												</Link>
 											)}
 										</TableCell>
 										<TableCell className="hidden md:table-cell text-neutral-700 dark:text-blue-500 font-bold">

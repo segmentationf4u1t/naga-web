@@ -153,8 +153,8 @@ export function StatisticsTable() {
 	};
 
 	return (
-		<div className="w-full border rounded-md p-6">
-			<div className="rounded-md">
+		<div className="w-full border rounded-md p-6 flex flex-col min-h-[400px]">
+			<div className="rounded-md flex-grow">
 				<Table>
 					<TableHeader>
 						<TableRow>
@@ -200,7 +200,7 @@ export function StatisticsTable() {
 				</Table>
 			</div>
 
-			<div className="flex items-center justify-between space-x-2 py-4">
+			<div className="flex items-center justify-between space-x-2 pt-4 mt-auto">
 				<div className="text-sm text-muted-foreground">
 					Page {currentPage} of {Math.ceil(sortedData.length / pageSize)}
 				</div>

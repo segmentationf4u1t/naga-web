@@ -83,7 +83,7 @@ export default function DashboardNavigation({
 	return (
 		<nav className="grid items-start text-sm font-medium p-2">
 			<div className="flex h-14 items-center ">
-				<aside className="w-64 bg-sidebar border-b">
+				<aside className="w-64 bg-sidebar">
 					<UserBar
 						name={userName}
 						tier="TBA"
@@ -119,8 +119,8 @@ export default function DashboardNavigation({
 					No Access
 				</Badge>
 			</NavLink>
-			<NavLink href="/dashboard/" icon={BarChartBig}>
-				V/I Modality
+			<NavLink href="/dashboard/vigen" icon={BarChartBig}>
+				V/I Generation
 			</NavLink>
 			<NavLink href="/dashboard/profile" icon={BarChartBig}>
 				Profile & Analytics

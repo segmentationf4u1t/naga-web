@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-
+import SafariH from "./safari";
 import { Core } from "@/conf/cfg";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -152,8 +152,8 @@ export default function Hero() {
 								variants={itemVariants}
 								className="container mx-auto"
 							/>
-							<h1>ssss</h1>
 						</div>
+						<SafariH />
 					</div>
 				</motion.section>
 			</div>

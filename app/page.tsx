@@ -7,7 +7,7 @@ import { MarqueeVertical } from "@/components/home/MarqueeVer";
 export default function Home() {
 	return (
 		<>
-			<div className="absolute inset-0 z-[-1]">
+			<div className="absolute inset-0">
 				<BackgroundBeams />
 			</div>
 

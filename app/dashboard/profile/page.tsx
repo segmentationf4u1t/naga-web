@@ -2,6 +2,7 @@ import ApiKeyGenerator from "@/components/dashboard/profile/keygen";
 
 import { StatisticsTable } from "@/components/dashboard/statistics/statistics-table";
 import { AreaChartInteractive } from "@/components/dashboard/statistics/area-chart";
+import SecurityLog from "@/components/dashboard/profile/security-log";
 
 export default function Profile() {
 	return (
@@ -11,8 +12,8 @@ export default function Profile() {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 				<StatisticsTable />
+				<SecurityLog />
 			</div>
-
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 				<ApiKeyGenerator />
 			</div>
